@@ -1,0 +1,14 @@
+# This playbook installs and configures java
+- hosts: "{{hosts}}"
+  tasks:
+    - name: config licsence for java
+      shell: echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections
+
+    - name: config licsence for java (cont)
+      shell: echo debconf shared/accepted-oracle-license-v1-1 seen true | debconf-set-selections
+
+    - name: add java repo
+      apt_repository: repo=ppa:webupd8team/java update_cache=yes
+
+    - name: install java
+      apt: name=oracle-java8-installer

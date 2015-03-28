@@ -1,0 +1,10 @@
+# This playbook installs and configures maven
+- hosts: "{{hosts}}"
+
+  tasks:
+
+    - name: install maven
+      apt: name=maven
+
+    - name: create .m2 dir
+      file: src=/root/.m2 state=directory
