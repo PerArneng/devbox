@@ -29,7 +29,7 @@ function check_arg {
 }
 
 function test_con {
-    ansible --user=$1 --ask-pass --inventory-file=$TEMP_INVENTORY_FILE all -a "/bin/echo ok"
+    ansible -v --user=$1 --ask-pass --inventory-file=$TEMP_INVENTORY_FILE all -a "/bin/echo ok"
 }
 
 function cleanup {
@@ -40,7 +40,7 @@ while getopts "u:r:th" opt; do
     case $opt in
         h)
             print_help
-            exit    
+            exit
             ;;
 
         u) username=$OPTARG;;
@@ -69,7 +69,8 @@ log "     username:    '"$username"'"
 log "     remote host: '"$remote_host"'"
 log ""
 
-echo $remote_host > $TEMP_INVENTORY_FILE
+echo "["$remote_host"]" > $TEMP_INVENTORY_FILE
+echo $remote_host >> $TEMP_INVENTORY_FILE
 
 if [[ -n $test_connection ]]
 then
@@ -80,5 +81,9 @@ then
 fi
 
 log "running playbooks"
+ansible-playbook -v -i "$remote_host," \
+  --extra-vars="hosts=$remote_host" \
+  -u $username --ask-pass \
+  -c ssh playbooks/java.yml
 
-cleanup
+#cleanup
