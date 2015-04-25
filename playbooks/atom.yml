@@ -1,0 +1,11 @@
+# This playbook installs and configures atom
+- hosts: "{{hosts}}"
+  sudo: True
+
+  tasks:
+
+    - name: add atom repo
+      apt_repository: repo='ppa:webupd8team/atom'
+
+    - name: install atom
+      apt: update_cache=yes name=atom

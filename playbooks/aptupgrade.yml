@@ -1,0 +1,8 @@
+# This playbook upgrades apt
+- hosts: "{{hosts}}"
+  sudo: True
+
+  tasks:
+
+    - name: upgrade apt
+      apt: upgrade=dist

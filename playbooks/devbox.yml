@@ -1,3 +1,8 @@
 # file: site.yml
+- include: aptupgrade.yml
 - include: java.yml
 - include: maven.yml
+- include: docker.yml
+- include: atom.yml
+- include: sbt.yml
+- include: vim.yml
