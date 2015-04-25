@@ -1,0 +1,19 @@
+# This playbook installs and configures groovy
+- hosts: "{{hosts}}"
+  sudo: True
+
+  tasks:
+    - name: download grovy
+      get_url: url=http://dl.bintray.com/groovy/maven/groovy-binary-2.4.3.zip dest=/tmp/groovy-binary.zip
+
+    - name: unzip groovy
+      unarchive: src=/tmp/groovy-binary.zip dest=/opt
+
+    - name: groovy symlink
+      file: src=/opt/groovy-2.4.3 dest=/opt/groovy state=link
+
+    - name: GROOVY_HOME
+      lineinfile: dest=/etc/profile line="export GROOVY_HOME=/opt/groovy"
+
+    - name: groovy in PATH
+      lineinfile: dest=/etc/profile line="export PATH=$PATH:$GROOVY_HOME/bin"

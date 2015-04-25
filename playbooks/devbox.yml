@@ -6,3 +6,4 @@
 - include: atom.yml
 - include: sbt.yml
 - include: vim.yml
+- include: groovy.yml
