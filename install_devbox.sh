@@ -83,7 +83,7 @@ fi
 log "running playbooks"
 ansible-playbook -v -i "$remote_host," \
   --extra-vars="hosts=$remote_host" \
-  -u $username --ask-pass \
-  -c ssh playbooks/java.yml
+  -u $username --ask-pass --ask-sudo-pass \
+  -c ssh playbooks/devbox.yml
 
 #cleanup

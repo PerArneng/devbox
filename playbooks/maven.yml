@@ -2,9 +2,9 @@
 - hosts: "{{hosts}}"
 
   tasks:
-
     - name: install maven
+      sudo: True
       apt: name=maven
 
     - name: create .m2 dir
-      file: src=/root/.m2 state=directory
+      file: path=/home/{{ansible_ssh_user}}/.m2 state=directory

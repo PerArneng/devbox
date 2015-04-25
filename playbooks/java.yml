@@ -1,5 +1,6 @@
 # This playbook installs and configures java
 - hosts: "{{hosts}}"
+  sudo: True
   tasks:
     - name: config licsence for java
       shell: echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections
