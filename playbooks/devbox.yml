@@ -7,3 +7,4 @@
 - include: sbt.yml
 - include: vim.yml
 - include: groovy.yml
+- include: tmux.yml
