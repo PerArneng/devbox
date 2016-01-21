@@ -20,4 +20,4 @@
       apt: name=docker-engine
     
     - name: add user to a docker group  
-      user: name={{ansible_ssh_user}} groups=docker
+      user: name={{ansible_ssh_user}} groups=docker append=yes
