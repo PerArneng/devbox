@@ -86,4 +86,4 @@ ansible-playbook -v -i "$remote_host," \
   -u $username --ask-pass --ask-sudo-pass \
   -c ssh playbooks/devbox.yml
 
-#cleanup
+cleanup
