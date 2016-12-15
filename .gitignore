@@ -1,1 +1,4 @@
 *.pyc
+.vscode
+devbox.egg-info
+dist

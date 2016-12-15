@@ -3,6 +3,7 @@
 import argparse
 import os
 from devboxcommons import Logger, OSUtils
+from pkg_resources import resource_filename
 
 class Application:
 
@@ -14,6 +15,10 @@ class Application:
         self.log = Logger(self.application_name)
         self.os_utils = OSUtils(self.log)
         self.os = self.os_utils.get_os_version()
+        try:
+            self.playbook_base_dir = os.path.abspath(resource_filename('playbooks', '.'))
+        except ImportError as identifier:
+            self.log.warn("could not load resource: '%s'. using './playbooks'" % identifier)
 
     def start(self):
 
