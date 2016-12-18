@@ -1,8 +1,8 @@
 # devbox
-This repository contains scripts and configuration files to setup a linux development machine. It uses ansible underneath to connect to a remote host and set it up using ansible tasks. Ansible normally manages multiple hosts but this scripts makes it one at a time by creating a temporary inventory file consisting of the hostname given as the *remote_host* argument of the the script.
+This repository contains scripts and configuration files to setup a linux development machine.
 
 # Supported distributions
-* Ubuntu v??
+* Ubuntu 16.10
 
 # install devbox
 ```
@@ -11,5 +11,10 @@ $ sudo pip install -e git+git@github.com:PerArneng/devbox.git#egg=devbox
 
 # Example
 ```
- $ bash install_devbox.sh -u rupert -r 123.43.21.143
+ $ devbox -a tmux
+```
+
+# Run on Windows
+```
+$ docker run -v c:/Users/perar:/home/devbox/hosthome -u devbox -it perarneng/devbox /bin/bash
 ```

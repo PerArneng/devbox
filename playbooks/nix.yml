@@ -1,0 +1,23 @@
+- hosts: "{{hosts}}"
+  
+  tasks:
+    - name: get install script
+      get_url: url=https://nixos.org/nix/install dest=/tmp/nixinstall.sh
+    
+    - name: install script mode to executable
+      file: path=/tmp/nixinstall.sh mode=0777
+
+    - name: install nix package manager
+      shell: /tmp/nixinstall.sh
+      environment:
+        USER: "{{ansible_user_id}}"
+      become_user: "{{ansible_user_id}}"
+
+    - name: update .bashrc
+      lineinfile: dest=~/.bashrc state=present line="source ~/.nix-profile/etc/profile.d/nix.sh"
+    
+    - name: env script mode to executable
+      file: path=~/.nix-profile/etc/profile.d/nix.sh mode=0777
+
+    - name: run nix env script
+      shell: ~/.nix-profile/etc/profile.d/nix.sh

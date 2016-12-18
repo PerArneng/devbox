@@ -1,0 +1,6 @@
+# /etc/default/locale
+
+LC_ALL=en_US.utf8
+LANG=en_US.utf8
+LC_CTYPE=en_US.utf8
+LC_COLLATE=en_US.utf8

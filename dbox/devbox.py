@@ -79,7 +79,7 @@ class Application:
 
         paths = " ".join(file_paths)
         print(paths)
-        self.os_utils.execute('ansible-playbook --ask-become-pass --become -i "localhost," -c local --extra-vars="hosts=localhost" %s %s' % (check_param, paths))
+        self.os_utils.execute('ansible-playbook --ask-become-pass -i "localhost," -c local --extra-vars="hosts=localhost" %s %s' % (check_param, paths))
 
 
 def main():
