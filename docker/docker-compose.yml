@@ -1,5 +1,8 @@
 version: '2'
+
 services:
   devbox:
     image: perarneng/devbox
     command: bin/bash
+    volumes:
+      - ".:/home/devbox/hosthome"

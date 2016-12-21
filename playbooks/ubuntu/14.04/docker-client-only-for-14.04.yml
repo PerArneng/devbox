@@ -1,0 +1,34 @@
+# This playbook installs and configures docker
+- hosts: "{{hosts}}"
+  become: yes
+
+  tasks:
+  
+    - name: install https apt transfer
+      apt: name='apt-transport-https'
+
+    - name: install ca certificates
+      apt: name='ca-certificates'
+
+    - name: add docker key from keyserver
+      apt_key: keyserver=hkp://ha.pool.sks-keyservers.net:80 id=58118E89F3A912897C070ADBF76221572C52609D
+
+    - name: add docker repo
+      apt_repository: repo='deb https://apt.dockerproject.org/repo ubuntu-trusty main' state=present
+
+    - shell: uname -r
+      register: uname
+
+    - name: 'install linux-image-extra-{{uname.stdout_lines[0]}}'
+      apt: name='linux-image-extra-{{uname.stdout_lines[0]}}'
+
+    - name: install docker
+      apt: name=docker-engine
+    
+    - name: add user to a docker group  
+      user: name={{ansible_ssh_user}} groups=docker append=yes
+
+    - name: disable service
+      service:
+        name: docker
+        enabled: no
